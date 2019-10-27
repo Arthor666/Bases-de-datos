@@ -8,6 +8,18 @@ URI     : https://colorlib.com
  -->
 
 <head>
+    <script>
+    function mi_alerta(){
+    var mensaje;
+    var opcion = confirm("¿Quieres cancelar tu evento?");
+    if (opcion == true) {
+        mensaje = "Sí, cancela";
+    }else{
+        mensaje = "No, cambie de parecer";
+    }
+    document.getElementById("ejemplo").innerHTML = mensaje;
+}
+</script>
     <title>Mis eventos</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -58,6 +70,7 @@ URI     : https://colorlib.com
   <a href="iniciar_evento.html">Iniciar Evento</a>
   <a class="active">Mis Eventos</a>
   <a href="buscar_evento.html">Buscar Evento</a>
+  <a href="sugerir_evento.html">Sugerir Evento</a>
     </div>
 
     <div class="container1">
@@ -79,7 +92,7 @@ URI     : https://colorlib.com
     <td>25-Octubre-2019</td>
     <td>13:30-15:00</td>
     <td>
-        <a href="pagina_principal.html"><input type="button" value="Cancelar" class="btn cancelar_btn"></a>
+        <a href="pagina_principal.html"><input type="button" value="Cancelar" class="btn cancelar_btn" onClick="mi_alerta()"></a>
     </td>
   </tr>
   <tr>

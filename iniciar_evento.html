@@ -14,6 +14,51 @@ URI     : https://colorlib.com
     var instances = M.FormSelect.init(elems, options);
   });
 </script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+function mostrar(id) {
+    if (id == "asesoria") {
+        $("#asesoria").show();
+        $("#consola").hide();
+        $("#nintendo").hide();
+        $("#PC").hide();
+    }
+    if (id == "consola") {
+        $("#asesoria").hide();
+        $("#consola").show();
+        $("#platicar").hide();
+        $("#matematicas").hide();
+        $("#programacion").hide();
+    }
+    if (id == "platicar"){
+        $("#asesoria").hide();
+        $("#consola").hide();
+        $("#platicar").show();
+        $("#nintendo").hide();
+        $("#PC").hide();
+        $("#matematicas").hide();
+        $("#programacion").hide();
+    }
+    if (id == "nintendo"){
+        $("#nintendo").show();
+        $("#PC").hide();
+    }
+    if (id == "pc"){
+        $("#nintendo").hide();
+        $("#PC").show();
+    }
+    if (id == "matematicas"){
+        $("#matematicas").show();
+        $("#programacion").hide();
+    }
+    if (id == "programacion"){
+        $("#matematicas").hide();
+        $("#programacion").show();
+    }
+}
+</script>
+
     <title>Iniciar Evento</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -64,6 +109,7 @@ URI     : https://colorlib.com
   <a class="active">Iniciar Evento</a>
   <a href="mis_eventos.html">Mis Eventos</a>
   <a href="buscar_evento.html">Buscar Evento</a>
+  <a href="sugerir_evento.html">Sugerir Evento</a>
     </div>
 
     <div class="container1">
@@ -74,9 +120,11 @@ URI     : https://colorlib.com
                             <div class="media">
                                 <div class="media-body">
                                     <div class="btn -btn-primary">
-                                    <h4 class="card-title"><label class="caja">Platicar<input type="radio" name="opcion" requiered>
-                                        <span class="checkmark"></span>
-                                        </label></h4>
+                                    <h4 class="card-title">
+                                    <label class="caja">    Platicar
+                                        <input type="radio"  name="opcion" value="platicar" onclick="mostrar(this.value);" requiered>
+                                        <span class="checkmark" id="status"></span>
+                                    </label></h4>
                                 </div>
                                 </div>
                             </div>
@@ -89,9 +137,11 @@ URI     : https://colorlib.com
                             <div class="media">
                                 <div class="media-body">
                                     <div class="btn -btn-primary">
-                                    <h4 class="card-title"><label class="caja">Jugar<input type="radio" name="opcion" requiered>
-                                        <span class="checkmark"></span>
-                                        </label></h4>
+                                    <h4 class="card-title">
+                                    <label class="caja">    Jugar
+                                        <input type="radio"  name="opcion" value="consola" onclick="mostrar(this.value);" requiered>
+                                        <span class="checkmark" id="status"></span>
+                                    </label></h4>
                                 </div>
                                 </div>
                             </div>
@@ -103,10 +153,12 @@ URI     : https://colorlib.com
                         <div class="card-body">
                             <div class="media">
                                 <div class="media-body">
-                                    <div class="btn -btn-primary" onclick="'active'">
-                                    <h4 class="card-title"><label class="caja">Asesor&iacutea<input type="radio" name="opcion" requiered>
-                                        <span class="checkmark"></span>
-                                        </label></h4>
+                                    <div class="btn -btn-primary">
+                                        <h4 class="card-title">
+                                    <label class="caja">    Asesor&iacutea
+                                        <input type="radio"  name="opcion" value="asesoria" onclick="mostrar(this.value);" requiered>
+                                        <span class="checkmark" id="status"></span>
+                                    </label></h4>
                                 </div>
                                 </div>
                             </div>
@@ -114,9 +166,97 @@ URI     : https://colorlib.com
                     </div>
                 </div>
             </div>
-         <br><br>
 
-        <select id="soflow-color" name="opcion" requiered>
+            <div id="platicar" style="display: none;"></div>
+
+            <div id="consola" style="display: none;">        <br>
+                <h2>Consola</h2>
+                <h4>
+                    <label class="caja">    Nintendo
+                        <input type="radio"  name="SuperAct" value="nintendo" onclick="mostrar(this.value);" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+
+                    <label class="caja">    PC
+                        <input type="radio"  name="SuperAct" value="pc" onclick="mostrar(this.value);" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label></h4>
+            </div>
+
+<!--***********************************JUEGOS*****************************************-->
+            
+            <div id="nintendo" style="display: none;">        <br>
+                <h2>Juego</h2>
+                <h4>
+                    <label class="caja">    Super Smash Bros.
+                        <input type="radio"  name="actividad" value="smash" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+
+                    <label class="caja">    Mario Kart
+                        <input type="radio"  name="actividad" value="MK" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label></h4>
+            </div>
+
+            <div id="PC" style="display: none;">        <br>
+                <h2>Juego</h2>
+                <h4>
+                    <label class="caja">    Cuphead
+                        <input type="radio"  name="actividad" value="cuphead" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+
+                    <label class="caja">    Moonlight
+                        <input type="radio"  name="actividad" value="moonlight" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label></h4>
+            </div>
+
+
+            <div id="asesoria" style="display: none;">        <br>
+                <h2>Asesor&iacutea</h2>
+                <h4>
+                    <label class="caja">    Matem&aacuteticas
+                        <input type="radio"  name="SuperAct" value="matematicas" onclick="mostrar(this.value);" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+
+                    <label class="caja">    Programaci&oacuten
+                        <input type="radio"  name="SuperAct" value="programacion" onclick="mostrar(this.value);" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label></h4>
+            </div>
+<!--**************************************MATERIAS***********************************************-->    
+            <div id="matematicas" style="display: none;">        <br>
+                <h2>Materia</h2>
+                <h4>
+                    <label class="caja">    Matem&aacuteticas Avanzadas
+                        <input type="radio"  name="actividad" value="avanzadas" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+
+                    <label class="caja">    Probabilidad y Estad&iacutestica
+                        <input type="radio"  name="actividad" value="probabilidad" requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label></h4>
+            </div>
+            <div id="programacion" style="display: none;">        <br>
+                <h2>Materia</h2>
+                <h4>
+                    <label class="caja">    Base de datos
+                        <input type="radio"  name="actividad" value="bd" defaultChecked requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
+
+                    <label class="caja">    POO
+                        <input type="radio"  name="actividad" value="poo" defaultChecked requiered>
+                        <span class="checkmark" id="status"></span>
+                    </label></h4>
+            </div>
+
+            <br>
+            <select id="soflow-color" name="opcion" requiered>
             <option disabled selected="">Selecciona un lugar</option>
             <option>Asta</option>
             <option>Cafeteria</option>
@@ -124,19 +264,18 @@ URI     : https://colorlib.com
         </select>
 
         <select id="soflow-color" name="opcion" requiered>
-            <option disabled selected>Selecciona una hora</option>
-            <option>12:00 - 13:30</option>
-            <option>13:30 - 15:00</option>
-            <option>15:00 - 16:30</option>
-        </select>     
-
-        <select id="soflow-color" name="opcion" requiered>
             <option disabled selected>Selecciona una fecha</option>
             <option>Ma&ntildeana</option>
             <option>Pasado ma&ntildeana</option>
             <option>En una semana</option>
-            <option></option>
-        </select>   
+        </select> 
+
+        <select id="soflow-color" name="opcion" requiered>
+            <option disabled selected>Selecciona una hora</option>
+            <option>12:00 - 13:30</option>
+            <option>13:30 - 15:00</option>
+            <option>15:00 - 16:30</option>
+        </select>               
     
         <div class="form-group">
                 <form action="pagina_principal.html">
