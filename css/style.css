@@ -12,6 +12,7 @@ Copyright © All rights Reserved
 */
 
 
+
 /*LOGIN------------------*/
 .stilo{
 background-image: url('espacio.jpg');
@@ -898,11 +899,12 @@ color: white;
     vertical-align: text-bottom;
 }
 
+
 /*Caja de opcion
 --------------------------------------*/
 .caja {
-  display: block;
-  position: relative;
+  /*display: block;
+  */position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
@@ -1098,6 +1100,17 @@ width: 100px;
 .cancelar_btn:hover{
 color: black;
 background-color: red;
+}
+
+.participar_btn{
+color: black;
+background-color: #008F39;
+width: 100px;
+}
+
+.participar_btn:hover{
+color: black;
+background-color: green;
 }
 
 .links{
