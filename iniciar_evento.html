@@ -256,9 +256,9 @@ function mostrar(id) {
             </div>
 
             <br>
-            <select id="soflow-color" name="opcion" requiered>
+            <select id="soflow-color" name="opcion" onchange="area.disabled = false" requiered>
             <option disabled selected="">Selecciona un lugar</option>
-            <option>Asta</option>
+            <options>Asta</option>
             <option>Cafeteria</option>
             <option>Salón 1202</option>
         </select>
@@ -277,6 +277,8 @@ function mostrar(id) {
             <option>15:00 - 16:30</option>
         </select>               
     
+        <input type="text" name="opcion" placeholder="Especifica el lugar"  rows="1">
+
         <div class="form-group">
                 <form action="pagina_principal.html">
                         <input type="submit" name="opcion" value="Guardar" class="btn guardar_btn"> </form>
