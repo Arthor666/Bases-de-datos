@@ -1,6 +1,6 @@
 <?php
 // Conectando y seleccionado la base de datos
-$dbconn = pg_connect("host=localhost dbname=examen user=arturo password=n0m3l0")
+$dbconn = pg_connect("host=localhost dbname=soledadescomiana user=soledad password=n0m3l0")
     or die('No se ha podido conectar: ' . pg_last_error());
 
 /*$result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());

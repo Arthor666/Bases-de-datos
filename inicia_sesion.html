@@ -24,6 +24,13 @@
     
     <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<script type="text/javascript">
+		function validar(){
+			var usuario= document.getElementById("entrada").value;
+			var password=document.getElementById("pass").value;
+			window.location="ingreso.php?usuario="+usuario+"&pass="+password;
+		}
+	</script>
 
 </head>
 
@@ -72,17 +79,17 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Usuario" name="entrada" requiered>
+						<input type="text" class="form-control" placeholder="Usuario" id="entrada" requiered>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="Contraseña" name="entrada" requiered>
+						<input type="password" class="form-control" placeholder="Contraseña" id="pass" requiered>
 					</div>
 					<div class="form-group">
-						<a href="pagina_principal.html">
+						<a onclick="validar()">
 							<input type="button" value="Entrar" name="entrada" class="btn float-right login_btn">
 						</a>
 						<br>

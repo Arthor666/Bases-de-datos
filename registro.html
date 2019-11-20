@@ -24,16 +24,16 @@
 		<script>
 		function envia(){
 			//window.alert("hola");
-		//	if(document.getElementById("inputPassword")===document.getElementById("inputConfirmPassword")){
-				var n_c=document.getElementById("inputUserame");
-				var n_f=document.getElementById("facebook");
-				var correo=document.getElementById("inputEmail");
-				var contra=document.getElementById("inputPassword");
-				var ruta="registro.php?n_c="+n_c+"&n_f="+n_f+"&cor="+correo+"&contra="+contra;
-				window.href=ruta;
-			//}else{
-		//		alert("Las contraseñas no coinciden :(");
-		//	}
+			if(document.getElementById("inputPassword").value===document.getElementById("inputConfirmPassword").value){
+				var n_c=document.getElementById("inputUserame").value;
+				var n_f=document.getElementById("facebook").value;
+				var correo=document.getElementById("inputEmail").value;
+				var contra=document.getElementById("inputPassword").value;
+        window.location="funcional_registro.php?n_c="+n_c+"&n_f="+n_f+"&cor="+correo+"&contra="+contra;
+				//document.location.href="funcional_registro.php?n_c="+n_c+"&n_f="+n_f+"&cor="+correo+"&contra="+contra;
+			}else{
+			alert("Las contraseñas no coinciden :(");
+		}
 
 		}
 		</script>
@@ -105,7 +105,7 @@
                 <label for="inputConfirmPassword">Confirmar contraseña</label>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="envia()" type="submit">Registrarse</button>
+              <a  onclick="envia()" ><input type="button" value="Registrarse" name="entrada" class="btn btn-lg btn-primary btn-block text-uppercase"></a>
               <a class="d-block text-center mt-2 small" href="inicia_sesion.html">Ya tienes una cuenta? inicia sesion</a>
               <hr class="my-4">
             </form>
