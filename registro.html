@@ -21,9 +21,24 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <!-- Main css -->
     <link href="css/style.css" rel="stylesheet">
+		<script>
+		function envia(){
+			//window.alert("hola");
+		//	if(document.getElementById("inputPassword")===document.getElementById("inputConfirmPassword")){
+				var n_c=document.getElementById("inputUserame");
+				var n_f=document.getElementById("facebook");
+				var correo=document.getElementById("inputEmail");
+				var contra=document.getElementById("inputPassword");
+				var ruta="registro.php?n_c="+n_c+"&n_f="+n_f+"&cor="+correo+"&contra="+contra;
+				window.href=ruta;
+			//}else{
+		//		alert("Las contraseñas no coinciden :(");
+		//	}
+
+		}
+		</script>
 </head>
 
-</head>
 <body class= "body_style"data-spy="scroll" data-target="#navbar" data-offset="30">
 
     <!-- Nav Menu -->
@@ -51,7 +66,7 @@
             <h1>Soledad Escomiana</h1>
             <p class="tagline">Nuestro objetivo es que no te sientas solo :)</p>
         </div>
-        
+
     </header>
   <div class="container">
     <div class="row">
@@ -67,9 +82,9 @@
                 <input type="text" id="inputUserame" class="form-control" placeholder="Nombre completo" required >
                 <label for="inputUserame">Nombre completo</label>
               </div>
-              
+
               <div class="form-label-group">
-                <input type="text" id="facebook" class="form-control" placeholder="Nombre facebook (opcional)" required>
+                <input type="text" id="facebook" class="form-control" placeholder="Nombre facebook (opcional)" >
                 <label for="facebook">Nombre en facebook (opcional)</label>
               </div>
 
@@ -77,20 +92,20 @@
                 <input type="email" id="inputEmail" class="form-control" placeholder="Correo electronico" required>
                 <label for="inputEmail">Correo electronico</label>
               </div>
-              
+
               <hr>
 
               <div class="form-label-group">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <label for="inputPassword">Contraseña</label>
               </div>
-              
+
               <div class="form-label-group">
                 <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
                 <label for="inputConfirmPassword">Confirmar contraseña</label>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrarse</button>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="envia()" type="submit">Registrarse</button>
               <a class="d-block text-center mt-2 small" href="inicia_sesion.html">Ya tienes una cuenta? inicia sesion</a>
               <hr class="my-4">
             </form>
