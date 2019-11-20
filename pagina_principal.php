@@ -1,9 +1,7 @@
 <!doctype html>
 <html lang="en">
 <?php
-    if(!isset($_SESSION)){
-        header("inicia_sesion.html");
-    }
+include 'sesion.php';
 ?>
 
 <head>
@@ -61,7 +59,7 @@
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item"> <a class="nav-link" href="configuracion.html">Configuraci&oacuten</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="index.html">Cerrar Sesi&oacuten</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="cerrar.php">Cerrar Sesi&oacuten</a> </li>
                             </ul>
                         </div>
                     </nav>
