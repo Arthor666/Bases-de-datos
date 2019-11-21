@@ -1,31 +1,22 @@
-<!doctype html>
-<html lang="en">
+
 <?php
 include 'sesion.php';
 ?>
-
+<html lang="en">
 <head>
-<script>
+    <script>
     function mi_alerta(){
     var mensaje;
-    var opcion = confirm("¿Quieres cancelar tu participación?");
+    var opcion = confirm("¿Quieres cancelar tu evento?");
     if (opcion == true) {
-        mensaje = "Saliste del evento";
-    }
-    document.getElementById("ejemplo").innerHTML = mensaje;
-}
-
-    function participacion(){
-    var mensaje;
-    var opcion = confirm("¿Quieres particicipar?");
-    if (opcion == true) {
-        alert("Te uniste al evento");
+        mensaje = "Sí, cancela";
+    }else{
+        mensaje = "No, cambie de parecer";
     }
     document.getElementById("ejemplo").innerHTML = mensaje;
 }
 </script>
-
-    <title>Menu</title>
+    <title>Mis eventos</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -59,7 +50,7 @@ include 'sesion.php';
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item"> <a class="nav-link" href="configuracion.html">Configuraci&oacuten</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="cerrar.php">Cerrar Sesi&oacuten</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="index.html">Cerrar Sesi&oacuten</a> </li>
                             </ul>
                         </div>
                     </nav>
@@ -70,17 +61,18 @@ include 'sesion.php';
     <br><br><br>   
     </header>
 
-        <div class="sidebar">
-  <a class="active" class="bg-gradient">Inicio</a>
+            <div class="sidebar">
+  <a href="pagina_principal.php">Inicio</a>
   <a href="iniciar_evento.html">Iniciar Evento</a>
-  <a href="mis_eventos.php">Mis Eventos</a>
+  <a class="active">Mis Eventos</a>
   <a href="buscar_evento.html">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir evento</a>
+  <a href="sugerir_evento.html">Sugerir Evento</a>
     </div>
 
     <div class="container1">
-    <h3> Tus eventos a participar</h3>
-    <table>
+        <h4> Aqu&iacute est&aacuten tus actividades:</h4>
+
+        <table>
   <tr>
     <th>N&uacutemero</th>
     <th>Actividad</th>
@@ -89,11 +81,11 @@ include 'sesion.php';
     <th>Hora Inicio</th>
     <th>Hora Fin</th>
     <th></th>
-    <th></th>
   </tr>
-  <?php
+  <tr>
+    <?php
     include 'databasecon.php';
-    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos WHERE idactividad IN (SELECT idactividad FROM participantes WHERE idusuario='".$_SESSION["usuario"]."');";
+    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos WHERE idusuario=".$_SESSION["usuario"].";";
     $result=pg_query($query) or die('La consulta fallo: ' . pg_last_error());
     while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     echo "<tr>";
@@ -108,44 +100,9 @@ include 'sesion.php';
     include 'close.php';
   ?>
 </table>
-
-    <br>
-    <h3> Te podr&iacutea interesar</h3>
-        <table>
-  <tr>
-    <th>N&uacutemero</th>
-    <th>Actividad</th>
-    <th>Lugar</th>
-    <th>Fecha</th>
-    <th>Hora Inicio</th>
-    <th>Hora Fin</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <?php
-    include 'databasecon.php';
-    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos;";
-    $result=pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-    echo "<tr>";
-    foreach ($line as $col_value) {
-        echo "<td>$col_value</td>";
-    }
-    $i=0;
-    echo "<td>
-        <a href='participa.php?act=".$line["idactividad"]."'><input type='button' value='Participar' class='btn participar_btn' onClick='participacion()'></a>
-
-    </td>";
-    echo "</tr>";
-    }
-    include 'close.php';
-  ?>
-</table>
     </div>
 
-    <!-- // end .section -->
-
-    <!-- jQuery and Bootstrap -->
+        <!-- jQuery and Bootstrap -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <!-- Plugins JS -->

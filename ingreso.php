@@ -2,7 +2,7 @@
 include 'databasecon.php';
 $usuario=$_GET["usuario"];
 $password=$_GET["pass"];
-$query = "SELECT 'hola',nombre from usuario WHERE correo='".$usuario."' AND contrasenia='".$password."'";
+$query = "SELECT 'hola',idusuario from usuario WHERE correo='".$usuario."' AND contrasenia='".$password."'";
 $result=pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 $row = pg_fetch_row($result);
 include 'close.php';
