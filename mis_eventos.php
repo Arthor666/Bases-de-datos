@@ -65,7 +65,7 @@ include 'sesion.php';
   <a href="pagina_principal.php">Inicio</a>
   <a href="iniciar_evento.html">Iniciar Evento</a>
   <a class="active">Mis Eventos</a>
-  <a href="buscar_evento.html">Buscar Evento</a>
+  <a href="buscar_evento.php">Buscar Evento</a>
   <a href="sugerir_evento.html">Sugerir Evento</a>
     </div>
 

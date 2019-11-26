@@ -74,7 +74,7 @@ include 'sesion.php';
   <a class="active" class="bg-gradient">Inicio</a>
   <a href="iniciar_evento.html">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
-  <a href="buscar_evento.html">Buscar Evento</a>
+  <a href="buscar_evento.php">Buscar Evento</a>
   <a href="sugerir_evento.html">Sugerir evento</a>
     </div>
 
