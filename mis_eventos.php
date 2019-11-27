@@ -63,7 +63,7 @@ include 'sesion.php';
 
             <div class="sidebar">
   <a href="pagina_principal.php">Inicio</a>
-  <a href="iniciar_evento.html">Iniciar Evento</a>
+  <a href="iniciar_evento.php">Iniciar Evento</a>
   <a class="active">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
   <a href="sugerir_evento.html">Sugerir Evento</a>

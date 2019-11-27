@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS soledadescomiana;
 create database soledadescomiana;
 \c soledadescomiana
 CREATE USER soledad WITH PASSWORD 'n0m3l0';
-ALTER ROLE soledad WITH SUPERUSER; 
+ALTER ROLE soledad WITH SUPERUSER;
 create table materia(
 idmateria int primary key,
 nombre varchar(70));
@@ -87,6 +87,11 @@ SELECT u.idusuario,a.idactividad,m.nombre,l.nombre AS lugar, a.fec_actividad, c.
 INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_materias acm ON acm.idactividad=
 a.idactividad INNER JOIN materia m ON m.idmateria=acm.idmateria INNER JOIN lugar l ON l.idlugar
 =a.idlugar INNER JOIN calendario c ON a.idcalendario=c.idcalendario ORDER BY hora_i;
+
+CREATE VIEW match_social AS SELECT u.nombre, a.fec_actividad,c.hora_i,c.hora_f,ca.idcatalogo,caa.nombre AS n_a, l.nombre AS lugar FROM usuario u
+INNER JOIN actividad a ON a.idusuario=u.idusuario INNER JOIN calendario c ON a.idcalendario=c.idcalendario
+INNER JOIN actividad_catalogoactividad ca ON ca.idactividad=a.idactividad
+INNER JOIN catalogo_actividad caa ON caa.idcatalogo=ca.idcatalogo INNER JOIN lugar l ON l.idlugar=a.idlugar;
 
 INSERT INTO catalogo_actividad VALUES(1,'Platicar');
 INSERT INTO catalogo_actividad VALUES(2,'Comer');

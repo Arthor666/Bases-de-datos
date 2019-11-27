@@ -72,7 +72,7 @@ include 'sesion.php';
 
         <div class="sidebar">
   <a class="active" class="bg-gradient">Inicio</a>
-  <a href="iniciar_evento.html">Iniciar Evento</a>
+  <a href="iniciar_evento.php">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
   <a href="sugerir_evento.html">Sugerir evento</a>
@@ -124,7 +124,7 @@ include 'sesion.php';
   </tr>
   <?php
     include 'databasecon.php';
-    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos;";
+    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos WHERE idusuario!=".$_SESSION['usuario'].";";
     $result=pg_query($query) or die('La consulta fallo: ' . pg_last_error());
     while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     echo "<tr>";
