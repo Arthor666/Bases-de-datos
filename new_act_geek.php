@@ -9,7 +9,7 @@ function nuevo($fecha,$hora,$id,$esp,$lugar){
 	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
 	$query4="INSERT INTO descripcio_lugar VALUES(".$lugar.",".$line['idactividad'].",'".$esp."');";
 	pg_query($query4) or die('La consulta fallo: ' . pg_last_error());
-	$query5="INSERT INTO actividad_catalogoactividad VALUES(".$line['idactividad'].",".$id.");";
+	$query5="INSERT INTO actividad_juegos VALUES(".$id.",".$line['idactividad'].");";
 	pg_query($query5) or die('La consulta fallo: ' . pg_last_error());
 	header("Location: pagina_principal.php");
 }
@@ -22,12 +22,12 @@ $estado=$_GET['estado'];
 if($estado==1){
 	nuevo($fecha,$hora,$id,$esp,$lugar);
 }
-$query="SELECT nombre,lugar,idactividad FROM match_social WHERE idcatalogo=".$id."AND fec_actividad='".$fecha."'";
+$query="SELECT nombre,lugar,idactividad FROM match_geek WHERE idjuego=".$id." AND fec_actividad='".$fecha."'";
 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 $line = pg_fetch_array($result, null, PGSQL_ASSOC);
 if(pg_num_rows ($result)!=0){
 	echo "<script> var opc=confirm('Tu compañerito ".$line['nombre']." Tambien tiene esa actividad en ese horario, quieres participar con el ?'); if(opc==true){
-		window.location= 'participa.php?act=".$line['idactividad']."'}else{window.location='new_act_soc.php?lugar=".$lugar."&&fecha=".$fecha."&&hora=".$hora."&&esp=".$esp."&&id=".$id."&&estado=1'}</script>";
+		window.location= 'participa.php?act=".$line['idactividad']."'}else{window.location='new_act_geek.php?lugar=".$lugar."&&fecha=".$fecha."&&hora=".$hora."&&esp=".$esp."&&id=".$id."&&estado=1'}</script>";
 }else{
 	nuevo($fecha,$hora,$id,$esp,$lugar);
 }

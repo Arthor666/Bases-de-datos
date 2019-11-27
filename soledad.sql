@@ -5,11 +5,11 @@ create database soledadescomiana;
 CREATE USER soledad WITH PASSWORD 'n0m3l0';
 ALTER ROLE soledad WITH SUPERUSER;
 create table materia(
-idmateria int primary key,
+idmateria SERIAL primary key,
 nombre varchar(70));
 
 create table juego(
-idjuego int primary key,
+idjuego SERIAL primary key,
 nombre varchar(70),
 fecha_lanzamiento date,
 descripcion varchar(90));
@@ -21,14 +21,8 @@ nombre varchar(60)
 
 create table lugar(
 idlugar int primary key,
-nombre varchar(50),
-descripcion varchar(100));
+nombre varchar(50));
 
-
-create table calendario(
-idcalendario int primary key,hora_i time,hora_f time,
-fecha_creacion date
-);
 
 create table usuario(
 idusuario SERIAL primary key,nombre varchar(50),
@@ -39,13 +33,12 @@ idprivilegio int references privilegio(idprivilegio)
 );
 
 create table catalogo_actividad(
-idcatalogo int primary key,
+idcatalogo SERIAL primary key,
 nombre varchar(30)
 );
 
 create table actividad(
-idactividad int primary key,fec_actividad date,
-idcalendario int references calendario(idcalendario),
+idactividad SERIAL primary key,fec_actividad date,hora_i time,hora_f time,
 idusuario int references usuario(idusuario) on delete cascade, idlugar int references lugar(idlugar)
 );
 
@@ -66,7 +59,7 @@ primary key(idactividad,idcatalogo)
 );
 
 CREATE TABLE descripcio_lugar(
-  idlugar int references lugar(idlugar),
+  idlugar int references lugar(idlugar),idactividad int references actividad(idactividad),
   descripcion text
 );
 
@@ -75,47 +68,46 @@ CREATE TABLE participantes(idusuario int REFERENCES usuario(idusuario) ,idactivi
 INSERT INTO privilegio (nombre) VALUES ('Usuario Mortal');
 INSERT INTO privilegio (nombre) VALUES ('Admin');
 
-CREATE VIEW tus_eventos AS SELECT u.idusuario,a.idactividad,ca.nombre,l.nombre AS lugar, a.fec_actividad, c.hora_i,c.hora_f FROM usuario u
+CREATE VIEW tus_eventos AS SELECT u.idusuario,a.idactividad,ca.nombre,l.nombre AS lugar, a.fec_actividad, a.hora_i,a.hora_f FROM usuario u
 INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_catalogoactividad aca ON aca.idactividad=
 a.idactividad INNER JOIN catalogo_actividad ca ON aca.idcatalogo=ca.idcatalogo INNER JOIN lugar l ON l.idlugar
-=a.idlugar INNER JOIN calendario c ON a.idcalendario=c.idcalendario UNION
-SELECT u.idusuario,a.idactividad,j.nombre,l.nombre AS lugar, a.fec_actividad, c.hora_i,c.hora_f FROM usuario u
+=a.idlugar UNION SELECT u.idusuario,a.idactividad,j.nombre,l.nombre AS lugar, a.fec_actividad, a.hora_i,a.hora_f FROM usuario u
 INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_juegos acj ON acj.idactividad=
 a.idactividad INNER JOIN juego j ON j.idjuego=acj.idjuego INNER JOIN lugar l ON l.idlugar
-=a.idlugar INNER JOIN calendario c ON a.idcalendario=c.idcalendario UNION
-SELECT u.idusuario,a.idactividad,m.nombre,l.nombre AS lugar, a.fec_actividad, c.hora_i,c.hora_f FROM usuario u
+=a.idlugar UNION SELECT u.idusuario,a.idactividad,m.nombre,l.nombre AS lugar, a.fec_actividad, a.hora_i,a.hora_f FROM usuario u
 INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_materias acm ON acm.idactividad=
 a.idactividad INNER JOIN materia m ON m.idmateria=acm.idmateria INNER JOIN lugar l ON l.idlugar
-=a.idlugar INNER JOIN calendario c ON a.idcalendario=c.idcalendario ORDER BY hora_i;
+=a.idlugar ORDER BY hora_i;
 
-CREATE VIEW match_social AS SELECT u.nombre, a.fec_actividad,c.hora_i,c.hora_f,ca.idcatalogo,caa.nombre AS n_a, l.nombre AS lugar FROM usuario u
-INNER JOIN actividad a ON a.idusuario=u.idusuario INNER JOIN calendario c ON a.idcalendario=c.idcalendario
-INNER JOIN actividad_catalogoactividad ca ON ca.idactividad=a.idactividad
+CREATE VIEW match_social AS SELECT u.nombre, a.fec_actividad,a.hora_i,a.hora_f,ca.idcatalogo,a.idactividad,caa.nombre AS n_a, l.nombre AS lugar FROM usuario u
+INNER JOIN actividad a ON a.idusuario=u.idusuario INNER JOIN actividad_catalogoactividad ca ON ca.idactividad=a.idactividad
 INNER JOIN catalogo_actividad caa ON caa.idcatalogo=ca.idcatalogo INNER JOIN lugar l ON l.idlugar=a.idlugar;
 
-INSERT INTO catalogo_actividad VALUES(1,'Platicar');
-INSERT INTO catalogo_actividad VALUES(2,'Comer');
-INSERT INTO juego VALUES(1,'Halo CE','2019-12-03');
-INSERT INTO juego VALUES(2,'Halo Reach','2010-10-14');
-INSERT INTO materia VALUES(1,'Matematicas Avanzadas');
-INSERT INTO materia VALUES(2,'Ecuaciones Diferenciales');
-INSERT INTO calendario VALUES (1,'13:00','14:30','2019-11-21');
-INSERT INTO calendario VALUES (2,'09:00','10:30','2019-11-21');
-INSERT INTO calendario VALUES (3,'11:00','12:30','2019-11-21');
-INSERT INTO calendario VALUES (4,'12:00','14:30','2019-11-21');
-INSERT INTO calendario VALUES (5,'12:00','14:30','2019-11-21');
-INSERT INTO calendario VALUES (6,'18:00','19:00','2019-11-21');
+CREATE VIEW match_geek AS SELECT u.nombre, a.fec_actividad,a.hora_i,a.hora_f,aj.idjuego,a.idactividad,j.nombre AS juego, l.nombre AS lugar FROM usuario u
+INNER JOIN actividad a ON a.idusuario=u.idusuario INNER JOIN actividad_juegos aj ON aj.idactividad=a.idactividad
+INNER JOIN juego j ON j.idjuego=aj.idjuego INNER JOIN lugar l ON l.idlugar=a.idlugar;
+
+CREATE VIEW match_asesoria AS SELECT u.nombre, a.fec_actividad,a.hora_i,a.hora_f,am.idmateria,a.idactividad,m.nombre AS materia, l.nombre AS lugar FROM usuario u
+INNER JOIN actividad a ON a.idusuario=u.idusuario INNER JOIN actividad_materias am ON am.idactividad=a.idactividad
+INNER JOIN materia m ON m.idmateria=am.idmateria INNER JOIN lugar l ON l.idlugar=a.idlugar;
+
+INSERT INTO catalogo_actividad (nombre) VALUES('Platicar');
+INSERT INTO catalogo_actividad (nombre) VALUES('Comer');
+INSERT INTO juego (nombre,fecha_lanzamiento) VALUES('Halo CE','2019-12-03');
+INSERT INTO juego (nombre,fecha_lanzamiento) VALUES('Halo Reach','2010-10-14');
+INSERT INTO materia (nombre) VALUES('Matematicas Avanzadas');
+INSERT INTO materia (nombre) VALUES('Ecuaciones Diferenciales');
 INSERT INTO lugar VALUES(1,'Explanada');
 INSERT INTO lugar VALUES(2,'Cafeteria');
-INSERT INTO usuario VALUES (1,'Pedro Navajas','Pedrito Navajas','abcd','sad@sadf.d',1);
-INSERT INTO usuario VALUES (2,'Dash','Difrazh','abcd','hola@hola.com',1);
-INSERT INTO usuario VALUES (3,'Halk','Jogan','abcd','Halk@jogan.com',1);
-INSERT INTO actividad VALUES (1,'2019-11-25',1,1,1);
-INSERT INTO actividad VALUES (2,'2019-11-25',2,1,2);
-INSERT INTO actividad VALUES (3,'2019-11-25',3,2,2);
-INSERT INTO actividad VALUES (4,'2019-11-25',4,2,1);
-INSERT INTO actividad VALUES (5,'2019-11-25',5,3,2);
-INSERT INTO actividad VALUES (6,'2019-11-25',6,3,1);
+INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VALUES ('Pedro Navajas','Pedrito Navajas','abcd','sad@sadf.d',1);
+INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VALUES ('Dash','Difrazh','abcd','hola@hola.com',1);
+INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VALUES ('Halk','Jogan','abcd','Halk@jogan.com',1);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','13:00','14:30',1,1);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','20:00','21:30',1,2);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','10:00','11:30',2,2);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','14:30','16:00',2,1);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','12:00','13:30',3,2);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','15:00','16:30',3,1);
 INSERT INTO actividad_catalogoactividad VALUES(1,1);
 INSERT INTO actividad_catalogoactividad VALUES(2,2);
 INSERT INTO actividad_juegos VALUES(1,3);

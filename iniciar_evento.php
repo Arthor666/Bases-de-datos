@@ -19,6 +19,8 @@ function mostrar(id) {
         $("#jugar").hide();
         $("#nintendo").hide();
         $("#PC").hide();
+        $("#platicar").hide();
+
     }
     if (id == "jugar") {
         $("#asesoria").hide();
@@ -62,7 +64,21 @@ function enviar(){
     var hora=document.getElementById('hora').value;
     var esp =document.getElementById('esp').value;
     var id=document.getElementById('otro').value;
-    window.location="new_act_soc.php?lugar="+lugar+"&&fecha="+fecha+"&&hora="+hora+"&&esp="+esp+"&&id="+id;
+    window.location="new_act_soc.php?lugar="+lugar+"&&fecha="+fecha+"&&hora="+hora+"&&esp="+esp+"&&id="+id+"&&estado=0";
+  }else if(act=='jugar'){
+    var lugar=document.getElementById('lugar').value;
+    var fecha=document.getElementById('fecha').value;
+    var hora=document.getElementById('hora').value;
+    var esp =document.getElementById('esp').value;
+    var id=document.getElementById('juego').value;
+    window.location="new_act_geek.php?lugar="+lugar+"&&fecha="+fecha+"&&hora="+hora+"&&esp="+esp+"&&id="+id+"&&estado=0";
+  }else if(act=='asesoria'){
+    var lugar=document.getElementById('lugar').value;
+    var fecha=document.getElementById('fecha').value;
+    var hora=document.getElementById('hora').value;
+    var esp =document.getElementById('esp').value;
+    var id=document.getElementById('materia').value;
+    window.location="new_act_asesoria.php?lugar="+lugar+"&&fecha="+fecha+"&&hora="+hora+"&&esp="+esp+"&&id="+id+"&&estado=0";
   }
 }
 </script>
@@ -220,23 +236,10 @@ function enviar(){
                   }
                   include "close.php"
                 ?>
+            </select>
             </div>
 
 <!--***********************************JUEGOS*****************************************-->
-
-            <div id="programacion" style="display: none;">        <br>
-                <h2>Materia</h2>
-                <h4>
-                    <label class="caja">    Base de datos
-                        <input type="radio"  name="actividad" value="bd" defaultChecked requiered>
-
-                    </label>    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp    &nbsp&nbsp&nbsp&nbsp
-
-                    <label class="caja">
-
-                    </label></h4>
-            </div>
-
             <br>
             <select id="lugar"  class="custom-select d-block w-10" name="opcion" onchange="area.disabled = false" requiered>
             <option disabled selected="">Selecciona un lugar</option>
