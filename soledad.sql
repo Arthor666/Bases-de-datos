@@ -29,7 +29,7 @@ idusuario SERIAL primary key,nombre varchar(50),
 nombre_facebook varchar(80),
 contrasenia varchar(15),
 correo varchar(80),
-idprivilegio int references privilegio(idprivilegio)
+idprivilegio int references privilegio(idprivilegio) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table catalogo_actividad(
@@ -44,7 +44,7 @@ idusuario int references usuario(idusuario) on delete cascade, idlugar int refer
 
 create table actividad_materias(
 idactividad int references actividad(idactividad) on delete cascade,
-idmateria int references materia(idmateria),
+idmateria int references materia(idmateria) ON DELETE CASCADE ON UPDATE CASCADE,
 primary key(idactividad,idmateria));
 
 create table actividad_juegos(
@@ -54,16 +54,18 @@ primary key (idactividad,idjuego));
 
 create table actividad_catalogoactividad(
 idactividad int references actividad(idactividad) on delete cascade,
-idcatalogo int references catalogo_actividad(idcatalogo),
+idcatalogo int references catalogo_actividad(idcatalogo) ON DELETE CASCADE ON UPDATE CASCADE,
 primary key(idactividad,idcatalogo)
 );
 
 CREATE TABLE descripcio_lugar(
-  idlugar int references lugar(idlugar),idactividad int references actividad(idactividad),
+  idlugar int references lugar(idlugar),idactividad int references actividad(idactividad) ON DELETE CASCADE ON UPDATE CASCADE,
   descripcion text
 );
 
-CREATE TABLE participantes(idusuario int REFERENCES usuario(idusuario) ,idactividad int REFERENCES actividad(idactividad));
+CREATE TABLE participantes(idusuario int REFERENCES usuario(idusuario) ON DELETE CASCADE ON UPDATE CASCADE, 
+	idactividad int REFERENCES actividad(idactividad) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 INSERT INTO privilegio (nombre) VALUES ('Usuario Mortal');
 INSERT INTO privilegio (nombre) VALUES ('Admin');
@@ -122,7 +124,7 @@ INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2
 INSERT INTO actividad_catalogoactividad VALUES(1,1);
 INSERT INTO actividad_catalogoactividad VALUES(2,2);
 INSERT INTO actividad_juegos VALUES(1,3);
-INSERT INTO actividad_juegos VALUES(1,8);
+INSERT INTO actividad_juegos VALUES(2,4);  --1,8
 INSERT INTO actividad_materias VALUES(5,1);
 INSERT INTO actividad_materias VALUES(6,2);
 

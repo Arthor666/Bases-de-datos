@@ -6,7 +6,7 @@ include 'sesion.php';
     <script>
     function mi_alerta(){
     var mensaje;
-    var opcion = confirm("¿Quieres cancelar tu evento?");
+    var opcion = confirm("¿Quieres borrar tu evento?");
     if (opcion == true) {
         mensaje = "Sí, cancela";
     }else{
@@ -93,7 +93,7 @@ include 'sesion.php';
         echo "<td>$col_value</td>";
     }
     echo "<td>
-        <a href='cancelar_a.php?act=".$line["idactividad"]."'><input type='button' value='Cancelar' class='btn cancelar_btn' onClick='mi_alerta()'></a>
+        <a href='borrar_actividad.php?act=".$line["idactividad"]."'><input type='button' value='Borrar' class='btn cancelar_btn' onClick='mi_alerta()'></a>
     </td>";
     echo "</tr>";
     }
