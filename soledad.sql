@@ -91,6 +91,17 @@ CREATE VIEW match_asesoria AS SELECT u.nombre, a.fec_actividad,a.hora_i,a.hora_f
 INNER JOIN actividad a ON a.idusuario=u.idusuario INNER JOIN actividad_materias am ON am.idactividad=a.idactividad
 INNER JOIN materia m ON m.idmateria=am.idmateria INNER JOIN lugar l ON l.idlugar=a.idlugar;
 
+create view busqueda_actividades as SELECT a.idactividad,u.nombre as anfitrion,ca.nombre,l.nombre AS lugar, a.fec_actividad, a.hora_i,u.nombre||' '||ca.nombre||' '||l.nombre||' '||a.fec_actividad||' '||a.hora_i as con FROM usuario u
+INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_catalogoactividad aca ON aca.idactividad=
+a.idactividad INNER JOIN catalogo_actividad ca ON aca.idcatalogo=ca.idcatalogo INNER JOIN lugar l ON l.idlugar
+=a.idlugar UNION SELECT a.idactividad,u.nombre as anfitrion,j.nombre,l.nombre AS lugar, a.fec_actividad, a.hora_i, u.nombre||' '||j.nombre||' '||l.nombre||' '||a.fec_actividad||' '||a.hora_i as con FROM usuario u
+INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_juegos acj ON acj.idactividad=
+a.idactividad INNER JOIN juego j ON j.idjuego=acj.idjuego INNER JOIN lugar l ON l.idlugar
+=a.idlugar UNION SELECT a.idactividad,u.nombre as anfitrion, m.nombre,l.nombre AS lugar, a.fec_actividad, a.hora_i,u.nombre||' '||m.nombre||' '||l.nombre||' '||a.fec_actividad||' '||a.hora_i as con FROM usuario u
+INNER JOIN actividad a ON u.idusuario=a.idusuario INNER JOIN actividad_materias acm ON acm.idactividad=
+a.idactividad INNER JOIN materia m ON m.idmateria=acm.idmateria INNER JOIN lugar l ON l.idlugar
+=a.idlugar;
+
 INSERT INTO catalogo_actividad (nombre) VALUES('Platicar');
 INSERT INTO catalogo_actividad (nombre) VALUES('Comer');
 INSERT INTO juego (nombre,fecha_lanzamiento) VALUES('Halo CE','2019-12-03');
@@ -102,7 +113,7 @@ INSERT INTO lugar VALUES(2,'Cafeteria');
 INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VALUES ('Pedro Navajas','Pedrito Navajas','abcd','sad@sadf.d',1);
 INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VALUES ('Dash','Difrazh','abcd','hola@hola.com',1);
 INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VALUES ('Halk','Jogan','abcd','Halk@jogan.com',1);
-INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','13:00','14:30',1,1);
+INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-27','13:00','14:30',1,1);
 INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','20:00','21:30',1,2);
 INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','10:00','11:30',2,2);
 INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','14:30','16:00',2,1);
@@ -111,6 +122,7 @@ INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2
 INSERT INTO actividad_catalogoactividad VALUES(1,1);
 INSERT INTO actividad_catalogoactividad VALUES(2,2);
 INSERT INTO actividad_juegos VALUES(1,3);
-INSERT INTO actividad_juegos VALUES(2,4);
+INSERT INTO actividad_juegos VALUES(1,8);
 INSERT INTO actividad_materias VALUES(5,1);
 INSERT INTO actividad_materias VALUES(6,2);
+
