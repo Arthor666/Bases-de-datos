@@ -130,10 +130,11 @@ function enviar(){
 
             <div class="sidebar">
   <a href="pagina_principal.php">Inicio</a>
-  <a class="active">Iniciar Evento</a>
+  <a class="active" class="bg-gradient">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir Evento</a>
+  <a href="sugerir_evento.html">Sugerir evento</a>
+  <a href="notificaciones.php">Notificaciones</a>
     </div>
 
     <div class="container1">

@@ -76,6 +76,7 @@ include 'sesion.php';
   <a href="mis_eventos.php">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
   <a href="sugerir_evento.html">Sugerir evento</a>
+  <a href="notificaciones.php">Notificaciones</a>
     </div>
 
     <div class="container1">

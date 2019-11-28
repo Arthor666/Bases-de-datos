@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="en">
+<?php
+    include 'sesion.php'
+?>
 <!--
 Page    : index / MobApp
 Version : 1.0
@@ -8,7 +11,7 @@ URI     : https://colorlib.com
  -->
 
 <head>
-    <title>Buscar Eventos</title>
+    <title>Notificaciones</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,12 +31,7 @@ URI     : https://colorlib.com
     <!-- Main css -->
     <link href="css/style.css" rel="stylesheet">
 
-    <script>
-        function buscar(){
-            var busqueda=document.getElementById("PalabraClave").value;
-            window.Location="Busqueda.php?busqueda="+busqueda;
-        }
-    </script>
+
 </head>
 
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
@@ -64,63 +62,42 @@ URI     : https://colorlib.com
   <a href="pagina_principal.php">Inicio</a>
   <a href="iniciar_evento.php">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
-  <a class="active" class="bg-gradient">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir evento</a>
-  <a href="notificaciones.php">Notificaciones</a>
+  <a class="buscar_evento.php">Buscar Evento</a>
+  <a href="sugerir_evento.html">Sugerir Evento</a>
+  <a class="active" class="bg-gradient">Notificaciones</a>  
     </div>
 <br>
     <div class="container1">
-        <h4>Encuentra tu actividad:</h4>
+        <h4>Notificaciones</h4>
         <div class="flexsearch">
             <div class="flexsearch--wrapper">
-                <form class="flexsearch--form" method="POST">
-                    <div class="flexsearch--input-wrapper">
-                        <input name="palabra" class="flexsearch--input" type="search" placeholder=" Pon palabras claves" method="POST">
-                    </div>
-                <input class="flexsearch--submit" type="submit" name="buscador" value="&#10140;"/>
-                </form>
+<?php
+    include 'databasecon.php';
+    $eventos="SELECT tus_eventos.nombre FROM participantes JOIN tus_eventos ON participantes.idactividad=tus_eventos.idactividad JOIN usuario ON usuario.idusuario=participantes.idusuario
+        WHERE participantes.idusuario<>tus_eventos.idusuario AND tus_eventos.idusuario='".$_SESSION["usuario"]."'";
+    $participantes="SELECT usuario.nombre FROM participantes JOIN tus_eventos ON participantes.idactividad=tus_eventos.idactividad JOIN usuario ON usuario.idusuario=participantes.idusuario
+        WHERE participantes.idusuario<>tus_eventos.idusuario AND tus_eventos.idusuario='".$_SESSION["usuario"]."'";
+    if($participantes==NULL || $eventos==NULL){
+        echo "<p> Nadie se ha unido a niguna actividad tuya, quiz&aacutes sea porque no hayas creado ninguna actividad a&aacuten</p>"; 
+    }else{
+    $resultparticipante=pg_query($participantes) or die('La consulta fallo: ' . pg_last_error());
+    $resultEvento=pg_query($eventos) or die('La consulta fallo: ' . pg_last_error());
+    while ($line = pg_fetch_array($resultparticipante, null, PGSQL_ASSOC)) {
+        while ($linea = pg_fetch_array($resultEvento, null, PGSQL_ASSOC)) {
+            foreach ($line as $col_value) {
+                foreach($linea as $columna_value){
+                    echo "$col_value quiere participar en tu evento '".$columna_value."'<br>"; 
+                }
+            }
+        }
+    }
+        include 'close.php';
+    }
+?>                
             </div>
         </div>
 
-        <h3> Resultado</h3>
-    <table>
-  <tr>
-    <th>N&uacutemero</th>
-    <th>Actividad</th>
-    <th>Lugar</th>
-    <th>Fecha</th>
-    <th>Hora Inicio</th>
-    <th>Hora Fin</th>
-    <th></th>
-    <th></th>
-  </tr>
 
-
-  <?php
-    include 'databasecon.php';
-    $buscar = (isset($_POST['palabra'])) ? $_POST['palabra'] : '';
-    $buscador = (isset($_POST['buscador'])) ? $_POST['buscador'] : '';
-    if($buscador==NULL){
-
-    }else{
-    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos WHERE nombre LIKE '%".$buscar."%'";
-    $result=pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-    echo "<tr>";
-    foreach ($line as $col_value) {
-        echo "<td>$col_value</td>";
-    }
-    $i=0;
-    echo "<td>
-        <a href='participa.php?act=".$line["idactividad"]."'><input type='button' value='Participar' class='btn participar_btn' onClick='participacion()'></a>
-
-    </td>";
-    echo "</tr>";
-    }
-    include 'close.php';
-}
-  ?>
-</table>
 
     </div>
 

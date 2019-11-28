@@ -1,4 +1,3 @@
-
 <?php
 include 'sesion.php';
 ?>
@@ -64,9 +63,10 @@ include 'sesion.php';
             <div class="sidebar">
   <a href="pagina_principal.php">Inicio</a>
   <a href="iniciar_evento.php">Iniciar Evento</a>
-  <a class="active">Mis Eventos</a>
+  <a class="active" class="bg-gradient">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir Evento</a>
+  <a href="sugerir_evento.html">Sugerir evento</a>
+  <a href="notificaciones.php">Notificaciones</a>
     </div>
 
     <div class="container1">
