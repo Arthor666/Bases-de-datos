@@ -37,7 +37,7 @@ URI     : https://colorlib.com
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
 
     <!-- Nav Menu -->
-    <header class="bg-gradient" id="home"> 
+    <header class="bg-gradient" id="home">
     <div class="nav-menu fixed-top">
         <div class="container">
             <div class="row">
@@ -55,7 +55,7 @@ URI     : https://colorlib.com
             </div>
         </div>
     </div>
-    <br><br><br>   
+    <br><br><br>
     </header>
 
             <div class="sidebar">
@@ -63,8 +63,7 @@ URI     : https://colorlib.com
   <a href="iniciar_evento.php">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
   <a class="buscar_evento.php">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir Evento</a>
-  <a class="active" class="bg-gradient">Notificaciones</a>  
+  <a class="active" class="bg-gradient">Notificaciones</a>
     </div>
 <br>
     <div class="container1">
@@ -78,7 +77,7 @@ URI     : https://colorlib.com
     $participantes="SELECT usuario.nombre FROM participantes JOIN tus_eventos ON participantes.idactividad=tus_eventos.idactividad JOIN usuario ON usuario.idusuario=participantes.idusuario
         WHERE participantes.idusuario<>tus_eventos.idusuario AND tus_eventos.idusuario='".$_SESSION["usuario"]."'";
     if($participantes==NULL || $eventos==NULL){
-        echo "<p> Nadie se ha unido a niguna actividad tuya, quiz&aacutes sea porque no hayas creado ninguna actividad a&aacuten</p>"; 
+        echo "<p> Nadie se ha unido a niguna actividad tuya, quiz&aacutes sea porque no hayas creado ninguna actividad a&aacuten</p>";
     }else{
     $resultparticipante=pg_query($participantes) or die('La consulta fallo: ' . pg_last_error());
     $resultEvento=pg_query($eventos) or die('La consulta fallo: ' . pg_last_error());
@@ -86,14 +85,14 @@ URI     : https://colorlib.com
         while ($linea = pg_fetch_array($resultEvento, null, PGSQL_ASSOC)) {
             foreach ($line as $col_value) {
                 foreach($linea as $columna_value){
-                    echo "$col_value quiere participar en tu evento '".$columna_value."'<br>"; 
+                    echo "$col_value quiere participar en tu evento '".$columna_value."'<br>";
                 }
             }
         }
     }
         include 'close.php';
     }
-?>                
+?>
             </div>
         </div>
 

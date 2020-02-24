@@ -133,7 +133,6 @@ function enviar(){
   <a class="active" class="bg-gradient">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir evento</a>
   <a href="notificaciones.php">Notificaciones</a>
     </div>
 
@@ -256,7 +255,7 @@ function enviar(){
         </select>
         <br>
 
-        <input type="date" class="custom-select d-block w-10" id="fecha">
+        <input type="date" class="custom-select d-block w-10" id="fecha" min="2019-11-28">
         <br>
         <br>
 
@@ -282,9 +281,12 @@ function enviar(){
                         <input type="submit" name="opcion" value="Guardar" class="btn guardar_btn">
                       </a>
         </div>
-
+        <footer>
+          No encuentras lo que quieres?
+          Manda un correo a
+          abrionesm1400@Alumno.ipn.mx
+        </footer>
     </div>
-
 
 
         <!-- jQuery and Bootstrap -->

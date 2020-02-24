@@ -22,6 +22,14 @@ $estado=$_GET['estado'];
 if($estado==1){
 	nuevo($fecha,$hora,$id,$esp,$lugar);
 }
+$query0="SELECT idusuario from match_social WHERE fec_actividad='".$fecha."' AND hora_i='".substr($hora, 0,5)."' AND idusuario=".$_SESSION['usuario'].";";
+$result0 = pg_query($query0) or die('La consulta fallo: ' . pg_last_error());
+$line0 = pg_fetch_array($result0, null, PGSQL_ASSOC);
+echo pg_num_rows ($result0);
+if(pg_num_rows ($result0)==0){
+	echo "<script>alert('ya tienes agendada una actividad en este horario, por favor botate a la vergonzuela');
+	window.location='pagina_principal.php'</script>";
+}
 $query="SELECT nombre,lugar,idactividad FROM match_social WHERE idcatalogo=".$id."AND fec_actividad='".$fecha."'";
 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 $line = pg_fetch_array($result, null, PGSQL_ASSOC);

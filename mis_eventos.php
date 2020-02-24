@@ -39,7 +39,7 @@ include 'sesion.php';
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
 
     <!-- Nav Menu -->
-    <header class="bg-gradient" id="home"> 
+    <header class="bg-gradient" id="home">
     <div class="nav-menu fixed-top">
         <div class="container">
             <div class="row">
@@ -57,7 +57,7 @@ include 'sesion.php';
             </div>
         </div>
     </div>
-    <br><br><br>   
+    <br><br><br>
     </header>
 
             <div class="sidebar">
@@ -65,7 +65,6 @@ include 'sesion.php';
   <a href="iniciar_evento.php">Iniciar Evento</a>
   <a class="active" class="bg-gradient">Mis Eventos</a>
   <a href="buscar_evento.php">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir evento</a>
   <a href="notificaciones.php">Notificaciones</a>
     </div>
 

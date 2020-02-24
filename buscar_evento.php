@@ -1,12 +1,8 @@
 <!doctype html>
 <html lang="en">
-<!--
-Page    : index / MobApp
-Version : 1.0
-Author  : Colorlib
-URI     : https://colorlib.com
- -->
-
+<?php
+include 'sesion.php';
+?>
 <head>
     <title>Buscar Eventos</title>
     <!-- Required meta tags -->
@@ -39,7 +35,7 @@ URI     : https://colorlib.com
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
 
     <!-- Nav Menu -->
-    <header class="bg-gradient" id="home"> 
+    <header class="bg-gradient" id="home">
     <div class="nav-menu fixed-top">
         <div class="container">
             <div class="row">
@@ -57,7 +53,7 @@ URI     : https://colorlib.com
             </div>
         </div>
     </div>
-    <br><br><br>   
+    <br><br><br>
     </header>
 
             <div class="sidebar">
@@ -65,7 +61,6 @@ URI     : https://colorlib.com
   <a href="iniciar_evento.php">Iniciar Evento</a>
   <a href="mis_eventos.php">Mis Eventos</a>
   <a class="active" class="bg-gradient">Buscar Evento</a>
-  <a href="sugerir_evento.html">Sugerir evento</a>
   <a href="notificaciones.php">Notificaciones</a>
     </div>
 <br>
@@ -103,7 +98,7 @@ URI     : https://colorlib.com
     if($buscador==NULL){
 
     }else{
-    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos WHERE nombre LIKE '%".$buscar."%'";
+    $query="SELECT idactividad,nombre,lugar,fec_actividad,hora_i,hora_f FROM tus_eventos WHERE nombre LIKE '%".$buscar."%' AND idusuario!=".$_SESSION['usuario'].";";
     $result=pg_query($query) or die('La consulta fallo: ' . pg_last_error());
     while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     echo "<tr>";
