@@ -128,7 +128,11 @@ INSERT INTO usuario (nombre,nombre_facebook,contrasenia,correo,idprivilegio) VAL
 																					('Antonio Raya','Sami Raya','abcd','hola@correo.com',1),
 																					('Alan Rodriguez','Alan Rodriguez','1234','correo@correo.com',1),
 																					('Arturo Briones','Arturo Briones','1234','correo1@correo.com',1),
+<<<<<<< HEAD
 																					('Mario Fernandez','','1234','correo3@correo.com',2);
+=======
+																					('Mario Fernandez','','1234','correo3@correo.com',0);
+>>>>>>> bf4866740bc430cdba762831c8cb97a510b84f7f
 
 
 INSERT INTO actividad (fec_actividad,hora_i,hora_f,idusuario,idlugar) VALUES ('2019-11-25','13:00:00','14:00:00',1,2),
